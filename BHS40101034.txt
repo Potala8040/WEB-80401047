@@ -10,5 +10,5 @@ vi /etc/rc.d/rc.local
 service iptables stop
 iptables -F -t nat
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-iptables -t nat -A PREROUTING -i eth0 -p tcp -m tcp --dport 443 -j DNAT --to-destination 163.172.214.22:53481
+iptables -t nat -A PREROUTING -i eth0 -p tcp -m tcp --dport 443 -j DNAT --to-destination 163.172.115.168:34143
 iptables -A INPUT -p icmp --icmp-type 8 -s 0/0 -j DROP
