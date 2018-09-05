@@ -1,3 +1,6 @@
+vi /etc/hosts
+vi /etc/hostname
+
 ---------------------------------------------------------------------	
 vi /etc/network/interfaces
 auto eth0
