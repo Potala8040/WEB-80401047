@@ -52,23 +52,37 @@ iface eth1 inet static
 
 auto vmbr00
 iface vmbr00 inet static
-        address  10.20.10.10
+        address  10.40.11.10
         netmask  255.255.255.0
-        gateway  10.20.10.1
+        gateway  10.40.11.1
         bridge_ports eth0
         bridge_stp off
         bridge_fd 0
 
 auto vmbr01
 iface vmbr01 inet static
-        address  10.25.10.10
+        address  10.45.11.10
         netmask  255.255.255.0
         bridge_ports none
         bridge_stp off
         bridge_fd 0
         post-up echo 1 > /proc/sys/net/ipv4/ip_forward
-        post-up iptables -t nat -A POSTROUTING -s '10.25.10.0/24' -o vmbr00 -j MASQUERADE
-        post-down iptables -t nat -D POSTROUTING -s '10.25.10.0/24' -o vmbr00 -j MASQUERADE
+        post-up iptables -t nat -A POSTROUTING -s '10.45.11.0/24' -o vmbr00 -j MASQUERADE
+        post-down iptables -t nat -D POSTROUTING -s '10.45.11.0/24' -o vmbr00 -j MASQUERADE
+        post-up iptables -t nat -A PREROUTING -i vmbr00 -p tcp --dport 80 -j DNAT --to 10.45.11.11:80
+        post-down iptables -t nat -D PREROUTING -i vmbr00 -p tcp --dport 80 -j DNAT --to 10.45.11.11:80
+        post-up iptables -t nat -A PREROUTING -i vmbr00 -p tcp --dport 51131 -j DNAT --to 10.45.11.11:3311
+        post-down iptables -t nat -D PREROUTING -i vmbr00 -p tcp --dport 51131 -j DNAT --to 10.45.11.11:3311
+        post-up iptables -t nat -A PREROUTING -i vmbr00 -p tcp --dport 51132 -j DNAT --to 10.45.11.11:3312
+        post-down iptables -t nat -D PREROUTING -i vmbr00 -p tcp --dport 51132 -j DNAT --to 10.45.11.11:3312
+        post-up iptables -t nat -A PREROUTING -i vmbr00 -p tcp --dport 52031 -j DNAT --to 10.45.11.20:3311
+        post-down iptables -t nat -D PREROUTING -i vmbr00 -p tcp --dport 52031 -j DNAT --to 10.45.11.20:3311
+        post-up iptables -t nat -A PREROUTING -i vmbr00 -p tcp --dport 52032 -j DNAT --to 10.45.11.20:3312
+        post-down iptables -t nat -D PREROUTING -i vmbr00 -p tcp --dport 52132 -j DNAT --to 10.45.11.20:3312
+        post-up iptables -t nat -A PREROUTING -i vmbr00 -p tcp --dport 52131 -j DNAT --to 10.45.11.21:3311
+        post-down iptables -t nat -D PREROUTING -i vmbr00 -p tcp --dport 52131 -j DNAT --to 10.45.11.21:3311
+        post-up iptables -t nat -A PREROUTING -i vmbr00 -p tcp --dport 52132 -j DNAT --to 10.45.11.21:3312
+        post-down iptables -t nat -D PREROUTING -i vmbr00 -p tcp --dport 52132 -j DNAT --to 10.45.11.21:3312
 		
 auto vmbr11
 iface vmbr11 inet static

@@ -1,0 +1,33 @@
+45 * * * * /bin/rm -rf /vhs/kangle/var/*
+45 * * * * /bin/rm -rf /tmp/sess*
+* * * * * /etc/init.d/mysqld start
+
+find /home/ftp -type f -iname "access.log" -exec rm -rf {} \;
+find /tmp -type f -iname "sess*" -exec rm -rf {} \;
+
+
+关闭Mysql日志
+vi /etc/my.cnf
+#log-bin
+
+service mysqld restart
+
+rm -rf /var/lib/mysql/mysqld*bin.*
+
+
+
+
+
+
+
+rm -rf /etc/my.cnf
+wget http://40.10.10.60/my.cnf -O /etc/my.cnf
+service mysqld restart
+rm -rf /var/lib/mysql/mysqld*bin.*
+ls
+
+
+wget http://40.10.10.60/config.xml -O /vhs/kangle/etc/config.xml
+/vhs/kangle/bin/kangle -r
+
+wget http://40.10.10.60/php-templete.ini -O /vhs/kangle/ext/tpl_php5633/php-templete.ini

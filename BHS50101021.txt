@@ -6,9 +6,10 @@ cat /proc/sys/net/ipv4/ip_forward
 ----------------------------------------------------------------------------------------------------
 vi /etc/rc.d/rc.local
 
-#QIANGIDC-BHS40101031
+#QIANGIDC-BHS40101021
 service iptables stop
 iptables -F -t nat
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-iptables -t nat -A PREROUTING -i eth0 -p tcp -m tcp --dport 443 -j DNAT --to-destination 62.210.132.71:53181
+iptables -t nat -A PREROUTING -i eth0 -p tcp -m tcp --dport 443 -j DNAT --to-destination 62.210.132.71:52181
+iptables -t nat -A PREROUTING -i eth0 -p tcp -m tcp --dport 51021 -j DNAT --to-destination 62.210.132.71:52085
 iptables -A INPUT -p icmp --icmp-type 8 -s 0/0 -j DROP
