@@ -9,7 +9,7 @@ vi /etc/hosts
 10.20.10.10 10201010.bhs.qiangidc.vip BHS10201010 pvelocalhost
 vi /etc/hostname
 BHS10101010
-
+dd if=/dev/zero of=/swapfile bs=1024 count=2048k
 dd if=/dev/zero of=/swapfile bs=4096 count=1572864
 mkswap /swapfile
 swapon /swapfile

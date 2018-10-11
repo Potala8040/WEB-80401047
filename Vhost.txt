@@ -1,3 +1,9 @@
+
+cd /home/ftp/m/master/wwwroot
+fallocate -l 100M QRWL-100MB.test.bin
+rm -rf 100MB.test
+wget http://69.12.64.149/index.html -O index.html
+
 45 * * * * /bin/rm -rf /vhs/kangle/var/*
 45 * * * * /bin/rm -rf /tmp/sess*
 * * * * * /etc/init.d/mysqld start
@@ -16,9 +22,12 @@ rm -rf /var/lib/mysql/mysqld*bin.*
 
 
 
-
-
-
+cd /vhs/kangle/nodewww/webftp/vhost/view/default
+rm -rf webftp
+cd /vhs/kangle/nodewww/webftp/vhost/view
+wget http://40.10.10.60/default.zip
+unzip  default.zip
+rm -rf default.zip
 
 rm -rf /etc/my.cnf
 wget http://40.10.10.60/my.cnf -O /etc/my.cnf

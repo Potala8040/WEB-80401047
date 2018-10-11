@@ -1,0 +1,23 @@
+vi /etc/sysctl.conf
+net.ipv4.ip_forward = 1
+sysctl -p
+cat /proc/sys/net/ipv4/ip_forward
+
+----------------------------------------------------------------------------------------------------
+vi /etc/rc.d/rc.local
+
+#QIANGIDC-BHS30501010
+service iptables stop
+iptables -t nat -A PREROUTING -d 54.38.160.139 -p tcp --dport 443 -j DNAT --to-destination 62.210.132.71:52181
+iptables -t nat -A POSTROUTING -d 62.210.132.71 -p tcp --dport 52181 -j SNAT --to-source 54.38.160.139
+iptables -t nat -A PREROUTING -d 54.38.160.140 -p tcp --dport 443 -j DNAT --to-destination 62.210.132.71:52181
+iptables -t nat -A POSTROUTING -d 62.210.132.71 -p tcp --dport 52181 -j SNAT --to-source 54.38.160.140
+iptables -t nat -A PREROUTING -d 54.38.160.141 -p tcp --dport 443 -j DNAT --to-destination 62.210.132.71:53181
+iptables -t nat -A POSTROUTING -d 62.210.132.71 -p tcp --dport 53181 -j SNAT --to-source 54.38.160.141
+iptables -t nat -A PREROUTING -d 54.38.160.142 -p tcp --dport 443 -j DNAT --to-destination 62.210.132.71:53381
+iptables -t nat -A POSTROUTING -d 62.210.132.71 -p tcp --dport 53381 -j SNAT --to-source 54.38.160.142
+iptables -t nat -A PREROUTING -d 54.38.160.143 -p tcp --dport 443 -j DNAT --to-destination 62.210.132.71:53481
+iptables -t nat -A POSTROUTING -d 62.210.132.71 -p tcp --dport 53481 -j SNAT --to-source 54.38.160.144
+iptables -t nat -A PREROUTING -d 54.38.160.144 -p tcp --dport 443 -j DNAT --to-destination 62.210.132.71:53581
+iptables -t nat -A POSTROUTING -d 62.210.132.71 -p tcp --dport 53581 -j SNAT --to-source 54.38.160.144
+iptables -A INPUT -p icmp --icmp-type 8 -s 0/0 -j DROP
