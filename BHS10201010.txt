@@ -4,6 +4,8 @@ vi /usr/share/vim/vim80/defaults.vim
 set mouse-=a
 sudo apt-get install net-tools
 
+curl http://metadata.tencentyun.com/meta-data/public-ipv4
+
 vi /etc/hosts
 127.0.0.1  localhost
 10.20.10.10 10201010.bhs.qiangidc.vip BHS10201010 pvelocalhost
